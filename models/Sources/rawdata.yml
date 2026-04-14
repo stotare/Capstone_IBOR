@@ -1,0 +1,99 @@
+version: 2
+
+sources:
+  - name: raw_data
+    database: IBOR_PROJECT
+    schema: RAW_DATA
+   # loaded_at_field: TRADE_DATE
+   # freshness:
+   #   warn_after:
+   #     count: 1
+   #     period: day
+   #   error_after:
+   #     count: 3
+   #     period: day
+
+    tables:
+
+      # =======================
+      # MARKET_PRICES
+      # =======================
+      - name: MARKET_PRICES
+        description: "Raw market prices received from upstream vendor feeds."
+        tests:
+          - dbt_utils.row_count:
+              min_value: 1
+        columns:
+          - name: SECURITY_ID
+            tests:
+              - not_null
+          - name: PRICE_DATE
+            tests:
+              - not_null
+
+      # =======================
+      # FX_RATES
+      # =======================
+      - name: FX_RATES
+        description: "Raw FX rates used for currency conversion in IBOR."
+        tests:
+          - dbt_utils.row_count:
+              min_value: 1
+        columns:
+          - name: FROM_CURRENCY
+            tests:
+              - not_null
+          - name: TO_CURRENCY
+            tests:
+              - not_null
+          - name: FX_RATE
+            tests:
+              - not_null
+          - name: AS_OF_DATE
+            tests:
+              - not_null
+
+      # =======================
+      # PORTFOLIOS
+      # =======================
+      - name: PORTFOLIOS
+        description: "Raw portfolio master data from IBOR."
+        tests:
+          - dbt_utils.row_count:
+              min_value: 1
+        columns:
+          - name: PORTFOLIO_ID
+            tests:
+              - not_null
+
+      # =======================
+      # SECURITIES_MASTER
+      # =======================
+      - name: SECURITIES_MASTER
+        description: "Raw securities master data before mastering."
+        tests:
+          - dbt_utils.row_count:
+              min_value: 1
+        columns:
+          - name: SECURITY_ID
+            tests:
+              - not_null
+          - name: SECURITY_TYPE
+            tests:
+              - not_null
+
+      # =======================
+      # TRANSACTIONS
+      # =======================
+      - name: TRANSACTIONS
+        description: "Raw transaction data from IBOR feed."
+        tests:
+          - dbt_utils.row_count:
+              min_value: 1
+        columns:
+          - name: TRANSACTION_ID
+            tests:
+              - not_null
+          - name: TRADE_DATE
+            tests:
+              - not_null
