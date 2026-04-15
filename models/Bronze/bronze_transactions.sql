@@ -1,7 +1,7 @@
 {{
     config(
         schema='bronze',
-        materialized='table',
+        materialized='view',
         tags=['Bronze', 'transactions']
     )
 }}
