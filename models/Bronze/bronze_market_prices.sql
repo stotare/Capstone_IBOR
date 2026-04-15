@@ -1,5 +1,6 @@
 {{
     config(
+        schema='BRONZE',
         materialized='view',
         tags=['Bronze', 'prices']
     )

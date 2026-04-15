@@ -89,15 +89,17 @@ sources:
             tests:
               - not_null
               - relationships:
-                  to: source('raw_data', 'portfolios')
-                  field: portfolio_id
+                  arguments:
+                    to: source('raw_data', 'portfolios')
+                    field: portfolio_id
           - name: security_id
             description: "Reference to security"
             tests:
               - not_null
               - relationships:
-                  to: source('raw_data', 'securities_master')
-                  field: security_id
+                  arguments:
+                    to: source('raw_data', 'securities_master')
+                    field: security_id
           - name: transaction_date
             description: "Date transaction was executed"
           - name: settlement_date
@@ -146,8 +148,9 @@ sources:
             tests:
               - not_null
               - relationships:
-                  to: source('raw_data', 'securities_master')
-                  field: security_id
+                  arguments:
+                    to: source('raw_data', 'securities_master')
+                    field: security_id
           - name: price_date
             description: "Date of price observation"
             tests:

@@ -22,7 +22,8 @@ sources:
         description: "Raw market prices received from upstream vendor feeds."
         tests:
           - dbt_utils.row_count:
-              min_value: 1
+              arguments:
+                min_value: 1
         columns:
           - name: SECURITY_ID
             tests:
@@ -38,7 +39,8 @@ sources:
         description: "Raw FX rates used for currency conversion in IBOR."
         tests:
           - dbt_utils.row_count:
-              min_value: 1
+              arguments:
+                min_value: 1
         columns:
           - name: FROM_CURRENCY
             tests:
@@ -60,7 +62,8 @@ sources:
         description: "Raw portfolio master data from IBOR."
         tests:
           - dbt_utils.row_count:
-              min_value: 1
+              arguments:
+                min_value: 1
         columns:
           - name: PORTFOLIO_ID
             tests:
@@ -73,7 +76,8 @@ sources:
         description: "Raw securities master data before mastering."
         tests:
           - dbt_utils.row_count:
-              min_value: 1
+              arguments:
+                min_value: 1
         columns:
           - name: SECURITY_ID
             tests:
@@ -89,7 +93,8 @@ sources:
         description: "Raw transaction data from IBOR feed."
         tests:
           - dbt_utils.row_count:
-              min_value: 1
+              arguments:
+                min_value: 1
         columns:
           - name: TRANSACTION_ID
             tests:

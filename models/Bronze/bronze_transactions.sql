@@ -1,5 +1,6 @@
 {{
     config(
+        schema='bronze',
         materialized='view',
         tags=['Bronze', 'transactions']
     )
