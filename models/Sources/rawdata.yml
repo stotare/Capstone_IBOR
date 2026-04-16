@@ -21,9 +21,8 @@ sources:
       - name: MARKET_PRICES
         description: "Raw market prices received from upstream vendor feeds."
         tests:
-          - dbt_utils.row_count:
-              arguments:
-                min_value: 1
+          - at_least_one_row
+
         columns:
           - name: SECURITY_ID
             tests:
@@ -38,9 +37,8 @@ sources:
       - name: FX_RATES
         description: "Raw FX rates used for currency conversion in IBOR."
         tests:
-          - dbt_utils.row_count:
-              arguments:
-                min_value: 1
+          - at_least_one_row
+
         columns:
           - name: FROM_CURRENCY
             tests:
@@ -48,10 +46,10 @@ sources:
           - name: TO_CURRENCY
             tests:
               - not_null
-          - name: FX_RATE
+          - name: RATE_ID
             tests:
               - not_null
-          - name: AS_OF_DATE
+          - name: RATE_DATE
             tests:
               - not_null
 
@@ -61,9 +59,8 @@ sources:
       - name: PORTFOLIOS
         description: "Raw portfolio master data from IBOR."
         tests:
-          - dbt_utils.row_count:
-              arguments:
-                min_value: 1
+          - at_least_one_row
+
         columns:
           - name: PORTFOLIO_ID
             tests:
@@ -75,14 +72,13 @@ sources:
       - name: SECURITIES_MASTER
         description: "Raw securities master data before mastering."
         tests:
-          - dbt_utils.row_count:
-              arguments:
-                min_value: 1
+          - at_least_one_row
+
         columns:
           - name: SECURITY_ID
             tests:
               - not_null
-          - name: SECURITY_TYPE
+          - name: SECURITY_NAME
             tests:
               - not_null
 
@@ -92,13 +88,12 @@ sources:
       - name: TRANSACTIONS
         description: "Raw transaction data from IBOR feed."
         tests:
-          - dbt_utils.row_count:
-              arguments:
-                min_value: 1
+          - at_least_one_row
+
         columns:
           - name: TRANSACTION_ID
             tests:
               - not_null
-          - name: TRADE_DATE
+          - name: TRANSACTION_DATE
             tests:
               - not_null
